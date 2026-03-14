@@ -25,8 +25,8 @@
   .container { max-width: 860px; margin: 0 auto; }
   h1 { font-size: 20px; font-weight: 500; margin-bottom: .25rem; }
   .subtitle { font-size: 13px; color: var(--text2); margin-bottom: 2rem; }
-  .tabs { display: flex; gap: 4px; margin-bottom: 1.5rem; background: var(--bg2); border-radius: var(--radius); padding: 4px; border: 0.5px solid var(--border); }
-  .tab { flex: 1; padding: 8px; font-size: 13px; font-weight: 500; border: none; background: transparent; color: var(--text2); cursor: pointer; border-radius: 6px; transition: all .15s; }
+  .tabs { display: flex; gap: 4px; margin-bottom: 1.5rem; background: var(--bg2); border-radius: var(--radius); padding: 4px; border: 0.5px solid var(--border); flex-wrap: wrap; }
+  .tab { flex: 1; min-width: 100px; padding: 8px; font-size: 12px; font-weight: 500; border: none; background: transparent; color: var(--text2); cursor: pointer; border-radius: 6px; transition: all .15s; }
   .tab.active { background: var(--bg); color: var(--text); border: 0.5px solid var(--border); }
   .panel { display: none; }
   .panel.active { display: block; }
@@ -68,13 +68,42 @@
   .notes-area:focus { outline: none; border-color: var(--border2); }
   .section-label { font-size: 11px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--text2); margin-bottom: .75rem; margin-top: 1.5rem; }
 
+  /* RELATÓRIO */
+  .rel-hero { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1rem; display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+  .rel-score-circle { width: 96px; height: 96px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; border: 3px solid; }
+  .rel-score-pct { font-size: 26px; font-weight: 500; line-height: 1; }
+  .rel-score-label { font-size: 10px; color: var(--text2); margin-top: 2px; }
+  .rel-hero-text { flex: 1; min-width: 180px; }
+  .rel-hero-title { font-size: 15px; font-weight: 500; margin-bottom: .35rem; }
+  .rel-hero-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .rel-metas { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; margin-bottom: 1rem; }
+  .rel-meta-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1rem; }
+  .rel-meta-label { font-size: 11px; color: var(--text2); margin-bottom: .4rem; }
+  .rel-meta-val { font-size: 22px; font-weight: 500; margin-bottom: .25rem; }
+  .rel-meta-sub { font-size: 11px; color: var(--text2); line-height: 1.5; }
+  .rel-pilar-row { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1rem; margin-bottom: .6rem; }
+  .rel-pilar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: .5rem; }
+  .rel-pilar-name { font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+  .rel-pilar-badge { font-size: 10px; padding: 2px 8px; border-radius: 20px; }
+  .badge-forte { background: #EAF3DE; color: #27500A; }
+  .badge-medio { background: #FAEEDA; color: #633806; }
+  .badge-critico { background: #FCEBEB; color: #A32D2D; }
+  @media (prefers-color-scheme: dark) {
+    .badge-forte { background: #173404; color: #C0DD97; }
+    .badge-medio { background: #412402; color: #FAC775; }
+    .badge-critico { background: #501313; color: #F09595; }
+  }
+  .rel-progress { height: 6px; background: var(--bg3); border-radius: 3px; margin-bottom: .5rem; overflow: hidden; }
+  .rel-progress-fill { height: 100%; border-radius: 3px; transition: width .4s ease; }
+  .rel-pilar-desc { font-size: 12px; color: var(--text2); line-height: 1.6; }
+
   /* PLANO DE AÇÃO */
   .plan-loading { display: flex; align-items: center; gap: 12px; padding: 2rem; color: var(--text2); font-size: 14px; }
   .spinner { width: 20px; height: 20px; border: 2px solid var(--border2); border-top-color: var(--text); border-radius: 50%; animation: spin .8s linear infinite; flex-shrink: 0; }
   @keyframes spin { to { transform: rotate(360deg); } }
   .plan-empty { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem; text-align: center; color: var(--text2); font-size: 14px; line-height: 1.7; }
   .plan-empty strong { display: block; font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: .5rem; }
-  .plan-output { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; font-size: 14px; line-height: 1.8; color: var(--text); white-space: pre-wrap; }
+  .plan-output { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; font-size: 14px; line-height: 1.8; color: var(--text); }
   .plan-output h2 { font-size: 15px; font-weight: 500; margin: 1.25rem 0 .5rem; color: var(--text); }
   .plan-output h2:first-child { margin-top: 0; }
   .plan-output p { margin-bottom: .75rem; }
@@ -91,6 +120,12 @@
     .psb-pill.mid { background: #412402; color: #FAC775; border-color: #854F0B; }
     .psb-pill.ok  { background: #173404; color: #C0DD97; border-color: #3B6D11; }
   }
+  .apikey-box { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1rem; }
+  .apikey-box label { font-size: 12px; color: var(--text2); display: block; margin-bottom: .4rem; }
+  .apikey-row { display: flex; gap: 8px; align-items: center; }
+  .apikey-input { flex: 1; border: 0.5px solid var(--border2); border-radius: var(--radius); padding: 8px 12px; font-size: 13px; color: var(--text); background: var(--bg2); font-family: monospace; outline: none; }
+  .apikey-input:focus { border-color: var(--info); }
+  .apikey-saved { font-size: 11px; color: var(--success); margin-top: .35rem; display: none; }
 </style>
 </head>
 <body>
@@ -105,7 +140,8 @@
   <div class="tabs">
     <button class="tab active" onclick="switchTab('mapa')">Mapa de pontuação</button>
     <button class="tab" onclick="switchTab('radar')">Spider chart</button>
-    <button class="tab" onclick="switchTab('notas')">Notas da sessão</button>
+    <button class="tab" onclick="switchTab('relatorio')">Relatório</button>
+    <button class="tab" onclick="switchTab('notas')">Notas</button>
     <button class="tab" onclick="switchTab('plano')">Plano de ação</button>
   </div>
 
@@ -119,8 +155,9 @@
     </div>
     <div class="btn-row">
       <button class="btn" onclick="resetAll()">Limpar notas</button>
-      <button class="btn" onclick="switchTab('radar')">Ver spider chart →</button>
-      <button class="btn primary" id="btn-gerar" onclick="switchTab('plano'); gerarPlano()">Gerar plano de ação →</button>
+      <button class="btn" onclick="switchTab('radar')">Spider chart →</button>
+      <button class="btn" onclick="switchTab('relatorio'); renderRelatorio()">Ver relatório →</button>
+      <button class="btn primary" onclick="switchTab('plano'); gerarPlano()">Gerar plano de ação →</button>
     </div>
   </div>
 
@@ -138,12 +175,24 @@
     <div class="section-label">Pontuação por pilar</div>
     <div class="pilar-scores-grid" id="pilar-scores-grid"></div>
     <div class="btn-row" style="margin-top:1rem;">
-      <button class="btn" onclick="switchTab('mapa')">← Voltar ao mapa</button>
+      <button class="btn" onclick="switchTab('mapa')">← Voltar</button>
       <button class="btn primary" onclick="exportPDF()">Exportar PDF</button>
     </div>
   </div>
 
-  <!-- PAINEL 3: NOTAS -->
+  <!-- PAINEL 3: RELATÓRIO -->
+  <div class="panel" id="panel-relatorio">
+    <div id="relatorio-content">
+      <div class="plan-empty"><strong>Relatório não gerado</strong>Preencha as notas no mapa de pontuação e clique em "Ver relatório".</div>
+    </div>
+    <div class="btn-row" style="margin-top:1rem;">
+      <button class="btn" onclick="switchTab('mapa')">← Voltar</button>
+      <button class="btn" onclick="renderRelatorio()">Atualizar relatório</button>
+      <button class="btn primary" onclick="exportPDF()">Exportar PDF</button>
+    </div>
+  </div>
+
+  <!-- PAINEL 4: NOTAS -->
   <div class="panel" id="panel-notas">
     <div class="section-label">Observações gerais</div>
     <textarea class="notes-area" id="nota-geral" placeholder="Anotações livres durante a sessão..."></textarea>
@@ -153,23 +202,28 @@
     <textarea class="notes-area" id="nota-proximos" placeholder="O que foi acordado para até a próxima call..."></textarea>
     <div class="section-label">Tarefa do cliente</div>
     <textarea class="notes-area" id="nota-tarefa" placeholder="Ex: listar 30 contatos qualificados da rede..."></textarea>
-    <div class="btn-row">
-      <button class="btn primary" onclick="exportPDF()">Exportar PDF completo</button>
-    </div>
+    <div class="btn-row"><button class="btn primary" onclick="exportPDF()">Exportar PDF</button></div>
   </div>
 
-  <!-- PAINEL 4: PLANO DE AÇÃO IA -->
+  <!-- PAINEL 5: PLANO IA -->
   <div class="panel" id="panel-plano">
-    <div id="plano-content">
-      <div class="plan-empty">
-        <strong>Plano de ação com IA</strong>
-        Preencha as notas no mapa de pontuação e clique em<br>"Gerar plano de ação com IA" para começar.
+    <div class="apikey-box">
+      <label>Chave de API do Claude (salva apenas neste navegador)</label>
+      <div class="apikey-row">
+        <input class="apikey-input" type="password" id="apikey-input" placeholder="sk-ant-..." oninput="salvarApiKey(this.value)">
+        <button class="btn" onclick="toggleApiKeyVisibility()">Mostrar</button>
       </div>
+      <div class="apikey-saved" id="apikey-saved">Chave salva neste navegador</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:.5rem;">Obtenha sua chave em <a href="https://console.anthropic.com" target="_blank" style="color:var(--info);">console.anthropic.com</a> → API Keys. A chave fica salva apenas localmente, nunca é enviada para outros servidores.</div>
+    </div>
+    <div id="plano-content">
+      <div class="plan-empty"><strong>Plano de ação com IA</strong>Insira sua chave de API, preencha as notas no mapa de pontuação e clique em "Gerar plano de ação".</div>
     </div>
     <div class="btn-row" style="margin-top:1rem;">
-      <button class="btn" onclick="switchTab('mapa')">← Voltar ao mapa</button>
-      <button class="btn" id="btn-regenerar" onclick="gerarPlano()" style="display:none;">Regenerar plano</button>
-      <button class="btn primary" onclick="exportPDF()">Exportar PDF</button>
+      <button class="btn" onclick="switchTab('mapa')">← Voltar</button>
+      <button class="btn" id="btn-regenerar" onclick="gerarPlano()" style="display:none;">Regenerar</button>
+      <button class="btn primary" onclick="gerarPlano()">Gerar plano de ação</button>
+      <button class="btn" onclick="exportPDF()">Exportar PDF</button>
     </div>
   </div>
 </div>
@@ -177,6 +231,9 @@
 <script>
 const pilares = [
   { nome: "Autoridade & Posicionamento", cor: "#378ADD", idealAvg: 4.6,
+    descForte: "Posicionamento claro e diferencial bem comunicado no digital.",
+    descMedio: "Autoridade existe mas ainda não está traduzida para o digital com clareza.",
+    descCritico: "Posicionamento vago ou ausente — o mercado não entende o que você entrega.",
     subs: [
       { criterio: "Reputação offline", pergunta: "Como você descreveria o que faz em uma frase para alguém que nunca te conheceu?", ref1: "não consegue articular", ref5: "frase clara e diferenciada" },
       { criterio: "Clareza de nicho", pergunta: "Qual problema você resolve melhor que qualquer pessoa?", ref1: "resposta genérica", ref5: "nicho específico e urgente" },
@@ -186,6 +243,9 @@ const pilares = [
     ]
   },
   { nome: "Audiência & Distribuição", cor: "#1D9E75", idealAvg: 4.6,
+    descForte: "Base sólida e engajada, com canais de distribuição próprios além das redes.",
+    descMedio: "Audiência existe mas é pequena ou pouco engajada — cresce com estratégia.",
+    descCritico: "Praticamente sem audiência digital ativa — construção do zero necessária.",
     subs: [
       { criterio: "Tamanho da base", pergunta: "Quantos seguidores no Instagram e LinkedIn?", ref1: "< 500 total", ref5: "> 5k engajados" },
       { criterio: "Engajamento real", pergunta: "— observação direta dos posts", ref1: "< 1% engajamento", ref5: "> 5% engajamento consistente" },
@@ -195,6 +255,9 @@ const pilares = [
     ]
   },
   { nome: "Produto & Esteira", cor: "#7F77DD", idealAvg: 4.6,
+    descForte: "Esteira completa com produtos claros, precificados e com progressão lógica.",
+    descMedio: "Produtos existem mas falta clareza na proposta de valor ou na esteira.",
+    descCritico: "Produtos indefinidos ou sem validação — difícil vender sem ajustes.",
     subs: [
       { criterio: "Low-ticket definido", pergunta: "Me conta todos os produtos que você tem prontos.", ref1: "não existe ou vago", ref5: "produto claro, precificado, pronto" },
       { criterio: "High-ticket definido", pergunta: "Mentoria ou serviço premium?", ref1: "não existe", ref5: "oferta clara com processo definido" },
@@ -204,6 +267,9 @@ const pilares = [
     ]
   },
   { nome: "Prova Social & Confiança", cor: "#D85A30", idealAvg: 4.6,
+    descForte: "Cases, depoimentos e resultados documentados que eliminam objeções.",
+    descMedio: "Resultados existem mas não estão documentados ou visíveis no digital.",
+    descCritico: "Ausência de prova social — compradores em funil frio não confiam sem evidências.",
     subs: [
       { criterio: "Histórico profissional sólido", pergunta: "— background e trajetória profissional", ref1: "sem histórico relevante", ref5: "trajetória de alto impacto" },
       { criterio: "Resultados de clientes", pergunta: "Tem clientes com resultado numérico comprovado?", ref1: "nenhum resultado documentado", ref5: "múltiplos cases com números" },
@@ -213,6 +279,9 @@ const pilares = [
     ]
   },
   { nome: "Funil & Conversão", cor: "#BA7517", idealAvg: 4.8,
+    descForte: "Infraestrutura de captura, nutrição e venda funcionando e gerando receita.",
+    descMedio: "Algumas peças existem mas o funil não está completo ou não converte.",
+    descCritico: "Sem funil — nenhum caminho estruturado para transformar seguidor em comprador.",
     subs: [
       { criterio: "Isca digital / lead magnet", pergunta: "Existe algum caminho estruturado para comprar?", ref1: "não existe nada", ref5: "isca ativa gerando leads" },
       { criterio: "Landing page de captura", pergunta: "Tem página de vendas ou checkout?", ref1: "não tem", ref5: "página otimizada e convertendo" },
@@ -222,6 +291,9 @@ const pilares = [
     ]
   },
   { nome: "Operação & Consistência", cor: "#639922", idealAvg: 4.4,
+    descForte: "Rotina de criação consolidada, ferramentas configuradas e capacidade de escalar.",
+    descMedio: "Posta com alguma frequência mas sem rotina ou calendário definido.",
+    descCritico: "Sem rotina, sem ferramentas — operação totalmente reativa e inconsistente.",
     subs: [
       { criterio: "Calendário editorial", pergunta: "Você posta com regularidade hoje?", ref1: "posta quando lembra", ref5: "calendário fixo com temas" },
       { criterio: "Frequência de postagem", pergunta: "Quantas horas por semana dedica ao digital?", ref1: "menos de 1h/semana", ref5: "rotina consistente > 5h/semana" },
@@ -241,9 +313,93 @@ function getAvg(pilar) {
   const vals = pilar.subs.map((s,si) => scores[pilar.nome+'_'+si]).filter(v => v > 0);
   return vals.length ? vals.reduce((a,b)=>a+b,0)/vals.length : 0;
 }
+function filledCount() { return Object.values(scores).filter(v => v > 0).length; }
 
-function filledCount() {
-  return Object.values(scores).filter(v => v > 0).length;
+function calcProbabilidade() {
+  const avgs = pilares.map(p => getAvg(p));
+  const filled = avgs.filter(v => v > 0);
+  if (filled.length < 3) return null;
+  const geral = filled.reduce((a,b)=>a+b,0) / filled.length;
+  const funnelAvg = getAvg(pilares[4]);
+  const provaAvg = getAvg(pilares[3]);
+  const produtoAvg = getAvg(pilares[2]);
+  const audAvg = getAvg(pilares[1]);
+  const score = (geral * 0.3) + (funnelAvg * 0.3) + (provaAvg * 0.2) + (produtoAvg * 0.1) + (audAvg * 0.1);
+  const pct = Math.round((score / 5) * 100);
+  let prazo, prazoDesc, nivel, cor;
+  if (pct >= 75) {
+    prazo = "2–3 meses"; prazoDesc = "Base sólida — execução é o que falta.";
+    nivel = "Alta"; cor = "#1D9E75";
+  } else if (pct >= 55) {
+    prazo = "3–5 meses"; prazoDesc = "Gaps existem mas são superáveis com foco.";
+    nivel = "Moderada"; cor = "#BA7517";
+  } else if (pct >= 35) {
+    prazo = "5–8 meses"; prazoDesc = "Fundação precisa ser construída antes de escalar.";
+    nivel = "Baixa"; cor = "#D85A30";
+  } else {
+    prazo = "8–12 meses"; prazoDesc = "Reconstrução profunda necessária em múltiplos pilares.";
+    nivel = "Muito baixa"; cor = "#A32D2D";
+  }
+  return { pct, prazo, prazoDesc, nivel, cor };
+}
+
+function renderRelatorio() {
+  const div = document.getElementById('relatorio-content');
+  const f = filledCount();
+  if (f < 10) {
+    div.innerHTML = '<div class="plan-empty"><strong>Notas insuficientes</strong>Preencha pelo menos 10 sub-critérios no mapa de pontuação para gerar o relatório.</div>';
+    return;
+  }
+  const prob = calcProbabilidade();
+  const clientName = document.getElementById('client-name').value || 'Cliente';
+  let html = '';
+
+  html += `<div class="rel-hero">
+    <div class="rel-score-circle" style="border-color:${prob.cor}; color:${prob.cor};">
+      <span class="rel-score-pct">${prob.pct}%</span>
+      <span class="rel-score-label">prontidão</span>
+    </div>
+    <div class="rel-hero-text">
+      <div class="rel-hero-title">${clientName} — Diagnóstico de prontidão digital</div>
+      <div class="rel-hero-desc">Probabilidade de chegar a R$ 100k de faturamento: <strong style="color:${prob.cor}">${prob.nivel} (${prob.pct}%)</strong>. ${prob.prazoDesc}</div>
+    </div>
+  </div>`;
+
+  html += `<div class="rel-metas">
+    <div class="rel-meta-card">
+      <div class="rel-meta-label">Prazo estimado para R$ 100k</div>
+      <div class="rel-meta-val" style="color:${prob.cor}">${prob.prazo}</div>
+      <div class="rel-meta-sub">Com execução consistente da estratégia definida na consultoria.</div>
+    </div>
+    <div class="rel-meta-card">
+      <div class="rel-meta-label">Chance de atingir em 60 dias</div>
+      <div class="rel-meta-val" style="color:${prob.pct >= 65 ? '#1D9E75' : prob.pct >= 45 ? '#BA7517' : '#D85A30'}">${prob.pct >= 65 ? 'Alta' : prob.pct >= 45 ? 'Moderada' : 'Baixa'}</div>
+      <div class="rel-meta-sub">Depende da velocidade de ativação da base quente e do funil de high-ticket.</div>
+    </div>
+  </div>`;
+
+  html += `<div class="section-label" style="margin-top:1.5rem;">Análise por pilar</div>`;
+  pilares.forEach(p => {
+    const avg = getAvg(p);
+    if (avg === 0) return;
+    const pct = Math.round((avg / p.idealAvg) * 100);
+    const isFort = avg >= 3.5, isMed = avg >= 2;
+    const badgeClass = isFort ? 'badge-forte' : isMed ? 'badge-medio' : 'badge-critico';
+    const badgeLabel = isFort ? 'Ponto forte' : isMed ? 'Atenção' : 'Crítico';
+    const desc = isFort ? p.descForte : isMed ? p.descMedio : p.descCritico;
+    html += `<div class="rel-pilar-row">
+      <div class="rel-pilar-header">
+        <span class="rel-pilar-name"><span style="width:8px;height:8px;border-radius:50%;background:${p.cor};display:inline-block;flex-shrink:0;"></span>${p.nome}</span>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:13px;font-weight:500;">${avg.toFixed(1)}/5</span>
+          <span class="rel-pilar-badge ${badgeClass}">${badgeLabel}</span>
+        </div>
+      </div>
+      <div class="rel-progress"><div class="rel-progress-fill" style="width:${pct}%;background:${p.cor};"></div></div>
+      <div class="rel-pilar-desc">${desc}</div>
+    </div>`;
+  });
+  div.innerHTML = html;
 }
 
 function updateTotals() {
@@ -284,7 +440,7 @@ function resetAll() {
   Object.keys(scores).forEach(k => scores[k] = 0);
   document.querySelectorAll('.dot-btn').forEach(btn => { btn.style.background=''; btn.style.borderColor=''; });
   document.querySelectorAll('[id^="sv_"]').forEach(el => el.textContent = '—');
-  document.getElementById('plano-content').innerHTML = '<div class="plan-empty"><strong>Plano de ação com IA</strong>Preencha as notas no mapa de pontuação e clique em<br>"Gerar plano de ação com IA" para começar.</div>';
+  document.getElementById('plano-content').innerHTML = '<div class="plan-empty"><strong>Plano de ação com IA</strong>Insira sua chave de API, preencha as notas e clique em "Gerar plano de ação".</div>';
   document.getElementById('btn-regenerar').style.display = 'none';
   updateTotals();
 }
@@ -306,7 +462,7 @@ function updatePilarScoreCards() {
 }
 
 function switchTab(id) {
-  const ids = ['mapa','radar','notas','plano'];
+  const ids = ['mapa','radar','relatorio','notas','plano'];
   document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', ids[i] === id));
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('panel-'+id).classList.add('active');
@@ -316,19 +472,30 @@ function switchTab(id) {
 function exportPDF() { window.print(); }
 function updateClientName(val) { document.title = 'Diagnóstico Digital' + (val ? ' — ' + val : ''); }
 
-async function gerarPlano() {
-  const filled = filledCount();
-  const clientName = document.getElementById('client-name').value || 'cliente';
-  const planoDiv = document.getElementById('plano-content');
-  const btnRegen = document.getElementById('btn-regenerar');
+function salvarApiKey(val) {
+  localStorage.setItem('diag_apikey', val);
+  const savedEl = document.getElementById('apikey-saved');
+  savedEl.style.display = val ? 'block' : 'none';
+}
+function toggleApiKeyVisibility() {
+  const input = document.getElementById('apikey-input');
+  input.type = input.type === 'password' ? 'text' : 'password';
+}
 
-  if (filled < 10) {
-    planoDiv.innerHTML = '<div class="plan-empty"><strong>Notas insuficientes</strong>Preencha pelo menos 10 sub-critérios no mapa de pontuação para gerar um plano relevante.<br><br><button class="btn primary" onclick="switchTab(\'mapa\')">← Voltar ao mapa</button></div>';
+async function gerarPlano() {
+  const apiKey = document.getElementById('apikey-input').value.trim();
+  if (!apiKey) {
+    document.getElementById('plano-content').innerHTML = '<div class="plan-empty"><strong>Chave de API necessária</strong>Insira sua chave da API do Claude no campo acima para gerar o plano.</div>';
     return;
   }
-
+  if (filledCount() < 10) {
+    document.getElementById('plano-content').innerHTML = '<div class="plan-empty"><strong>Notas insuficientes</strong>Preencha pelo menos 10 sub-critérios no mapa de pontuação.<br><br><button class="btn primary" onclick="switchTab(\'mapa\')">← Ir ao mapa</button></div>';
+    return;
+  }
+  const clientName = document.getElementById('client-name').value || 'cliente';
+  const planoDiv = document.getElementById('plano-content');
+  document.getElementById('btn-regenerar').style.display = 'none';
   planoDiv.innerHTML = '<div class="plan-loading"><div class="spinner"></div>Analisando o diagnóstico e gerando o plano de ação...</div>';
-  btnRegen.style.display = 'none';
 
   const resumo = pilares.map(p => {
     const avg = getAvg(p);
@@ -339,10 +506,7 @@ async function gerarPlano() {
     return `${p.nome}: média ${avg > 0 ? avg.toFixed(1) : 'não avaliado'}/5\n${detalhes}`;
   }).join('\n\n');
 
-  const notas = [
-    document.getElementById('nota-geral')?.value,
-    document.getElementById('nota-gaps')?.value
-  ].filter(Boolean).join('\n');
+  const notas = [document.getElementById('nota-geral')?.value, document.getElementById('nota-gaps')?.value].filter(Boolean).join('\n');
 
   const prompt = `Você é um consultor especialista em marketing digital para criadores de conteúdo e infoprodutores.
 
@@ -356,17 +520,22 @@ ${notas ? `Observações adicionais da sessão:\n${notas}` : ''}
 
 Com base nessas notas, gere um plano de ação personalizado e priorizado. O plano deve:
 
-1. Começar com um parágrafo de diagnóstico resumido (2-3 frases) que contextualiza o perfil do ${clientName}
-2. Listar as 3 prioridades imediatas (próximas 2 semanas) — focadas nos gaps mais críticos que travam a geração de receita
+1. Começar com um parágrafo de diagnóstico resumido (2-3 frases) contextualizando o perfil
+2. Listar as 3 prioridades imediatas (próximas 2 semanas) — focadas nos gaps que travam a receita
 3. Listar as 3 prioridades de médio prazo (meses 2-3) — construção de audiência e funil
-4. Terminar com 1 insight estratégico principal: o que mais vai mover o ponteiro para esse perfil específico
+4. Terminar com 1 insight estratégico: o que mais vai mover o ponteiro para esse perfil específico
 
-Seja direto, prático e específico. Use linguagem consultiva mas acessível. Não use jargões desnecessários. Formato: use títulos claros para cada seção e bullet points para as ações. Responda em português brasileiro.`;
+Seja direto, prático e específico. Linguagem consultiva mas acessível. Use títulos claros e bullet points. Responda em português brasileiro.`;
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 1000,
@@ -374,10 +543,14 @@ Seja direto, prático e específico. Use linguagem consultiva mas acessível. N�
       })
     });
 
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      throw new Error(err.error?.message || `Erro ${response.status}`);
+    }
+
     const data = await response.json();
     const text = data.content?.find(b => b.type === 'text')?.text || '';
-
-    if (!text) throw new Error('Resposta vazia');
+    if (!text) throw new Error('Resposta vazia da API');
 
     const pillsHtml = pilares.map(p => {
       const avg = getAvg(p);
@@ -391,25 +564,23 @@ Seja direto, prático e específico. Use linguagem consultiva mas acessível. N�
       .replace(/^### (.+)$/gm, '<h2>$1</h2>')
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/^- (.+)$/gm, '<li>$1</li>')
-      .replace(/(<li>.*<\/li>\n?)+/g, m => `<ul>${m}</ul>`)
-      .replace(/\n\n/g, '</p><p>')
-      .replace(/^(?!<[hul])(.+)$/gm, (m) => m.startsWith('<') ? m : m);
+      .replace(/(<li>[^<]*<\/li>\n?)+/g, m => `<ul>${m}</ul>`)
+      .replace(/\n\n+/g, '</p><p>')
+      .replace(/^(?!<)(.*)/gm, (m) => m.trim() && !m.startsWith('<') ? `<p>${m}</p>` : m);
 
     planoDiv.innerHTML = `<div class="plan-score-bar">${pillsHtml}</div><div class="plan-output">${rendered}</div>`;
-    btnRegen.style.display = 'inline-block';
+    document.getElementById('btn-regenerar').style.display = 'inline-block';
 
   } catch (err) {
-    planoDiv.innerHTML = `<div class="plan-empty"><strong>Erro ao gerar o plano</strong>Verifique sua conexão e tente novamente.<br><small style="color:var(--text3)">${err.message}</small><br><br><button class="btn primary" onclick="gerarPlano()">Tentar novamente</button></div>`;
+    planoDiv.innerHTML = `<div class="plan-empty"><strong>Erro ao gerar o plano</strong>${err.message}<br><br><button class="btn primary" onclick="gerarPlano()">Tentar novamente</button></div>`;
   }
 }
 
 const container = document.getElementById('pilares-container');
 pilares.forEach(p => {
   const safeId = p.nome.replace(/[^a-z]/gi,'');
-  const block = document.createElement('div');
-  block.className = 'pilar-block';
-  const head = document.createElement('div');
-  head.className = 'pilar-head';
+  const block = document.createElement('div'); block.className = 'pilar-block';
+  const head = document.createElement('div'); head.className = 'pilar-head';
   head.innerHTML = `<span class="pilar-dot" style="background:${p.cor}"></span><span class="pilar-name">${p.nome}</span><span class="pilar-avg" id="avg_${safeId}">—</span><span class="chevron open">&#9654;</span>`;
   const body = document.createElement('div');
   body.style.cssText = 'overflow:hidden; max-height:2000px; transition:max-height .3s ease;';
@@ -432,7 +603,14 @@ pilares.forEach(p => {
 window.addEventListener('load', () => {
   const d = new Date();
   const dateEl = document.getElementById('date-display');
-  if (dateEl) dateEl.textContent = d.toLocaleDateString('pt-BR', {day:'2-digit',month:'long',year:'numeric'});
+  if (dateEl) dateEl.textContent = d.toLocaleDateString('pt-BR', {day:'2-digit', month:'long', year:'numeric'});
+
+  const savedKey = localStorage.getItem('diag_apikey') || '';
+  if (savedKey) {
+    document.getElementById('apikey-input').value = savedKey;
+    document.getElementById('apikey-saved').style.display = 'block';
+  }
+
   const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const gridColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
   const tickColor = isDark ? '#6e6c66' : '#888780';
