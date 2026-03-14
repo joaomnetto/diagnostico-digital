@@ -8,31 +8,17 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg: #ffffff;
-    --bg2: #f5f4f0;
-    --bg3: #eeedea;
-    --text: #1a1a18;
-    --text2: #5f5e5a;
-    --text3: #888780;
-    --border: rgba(0,0,0,0.12);
-    --border2: rgba(0,0,0,0.22);
-    --success: #1D9E75;
-    --warning: #BA7517;
-    --danger: #D85A30;
-    --info: #185FA5;
-    --radius: 8px;
-    --radius-lg: 12px;
+    --bg: #ffffff; --bg2: #f5f4f0; --bg3: #eeedea;
+    --text: #1a1a18; --text2: #5f5e5a; --text3: #888780;
+    --border: rgba(0,0,0,0.12); --border2: rgba(0,0,0,0.22);
+    --success: #1D9E75; --warning: #BA7517; --danger: #D85A30; --info: #185FA5;
+    --radius: 8px; --radius-lg: 12px;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #1c1c1a;
-      --bg2: #252522;
-      --bg3: #2e2e2b;
-      --text: #e8e6df;
-      --text2: #a8a69f;
-      --text3: #6e6c66;
-      --border: rgba(255,255,255,0.1);
-      --border2: rgba(255,255,255,0.18);
+      --bg: #1c1c1a; --bg2: #252522; --bg3: #2e2e2b;
+      --text: #e8e6df; --text2: #a8a69f; --text3: #6e6c66;
+      --border: rgba(255,255,255,0.1); --border2: rgba(255,255,255,0.18);
     }
   }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg3); color: var(--text); min-height: 100vh; padding: 2rem 1rem; }
@@ -44,8 +30,6 @@
   .tab.active { background: var(--bg); color: var(--text); border: 0.5px solid var(--border); }
   .panel { display: none; }
   .panel.active { display: block; }
-
-  /* --- PAINEL 1: MAPA DE PONTUAÇÃO --- */
   .pilar-block { margin-bottom: 1rem; border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg); }
   .pilar-head { display: flex; align-items: center; gap: 10px; padding: .85rem 1rem; background: var(--bg2); cursor: pointer; user-select: none; }
   .pilar-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
@@ -63,8 +47,6 @@
   .score-dots { display: flex; gap: 4px; }
   .dot-btn { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--border2); background: transparent; cursor: pointer; transition: all .15s; padding: 0; }
   .score-val { font-size: 12px; font-weight: 500; color: var(--text2); min-width: 18px; }
-
-  /* --- PAINEL 2: SPIDER CHART --- */
   .chart-wrap { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1rem; }
   .legend-row { display: flex; gap: 20px; margin-bottom: 1rem; font-size: 12px; color: var(--text2); align-items: center; }
   .leg-line { width: 24px; height: 2px; display: inline-block; vertical-align: middle; margin-right: 4px; }
@@ -72,38 +54,62 @@
   .pilar-score-card { background: var(--bg2); border-radius: var(--radius); padding: .75rem 1rem; display: flex; justify-content: space-between; align-items: center; }
   .psc-name { font-size: 12px; color: var(--text2); }
   .psc-val { font-size: 14px; font-weight: 500; }
-
-  /* --- TOTAIS --- */
   .total-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin: 1.5rem 0 1rem; }
   .metric { background: var(--bg2); border-radius: var(--radius); padding: .75rem 1rem; }
   .metric-label { font-size: 11px; color: var(--text2); margin-bottom: .25rem; }
   .metric-val { font-size: 20px; font-weight: 500; color: var(--text); }
-
-  /* --- BOTÕES --- */
   .btn-row { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1rem; }
   button.btn { background: var(--bg); border: 0.5px solid var(--border2); border-radius: var(--radius); padding: 8px 16px; font-size: 13px; color: var(--text); cursor: pointer; transition: background .15s; }
   button.btn:hover { background: var(--bg2); }
   button.btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
   button.btn.primary:hover { opacity: .85; }
-
-  /* --- NOTAS --- */
+  button.btn:disabled { opacity: .45; cursor: not-allowed; }
   .notes-area { width: 100%; border: 0.5px solid var(--border); border-radius: var(--radius); padding: .75rem 1rem; font-size: 13px; color: var(--text); background: var(--bg); resize: vertical; min-height: 100px; font-family: inherit; margin-top: .5rem; }
   .notes-area:focus { outline: none; border-color: var(--border2); }
   .section-label { font-size: 11px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--text2); margin-bottom: .75rem; margin-top: 1.5rem; }
+
+  /* PLANO DE AÇÃO */
+  .plan-loading { display: flex; align-items: center; gap: 12px; padding: 2rem; color: var(--text2); font-size: 14px; }
+  .spinner { width: 20px; height: 20px; border: 2px solid var(--border2); border-top-color: var(--text); border-radius: 50%; animation: spin .8s linear infinite; flex-shrink: 0; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .plan-empty { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem; text-align: center; color: var(--text2); font-size: 14px; line-height: 1.7; }
+  .plan-empty strong { display: block; font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: .5rem; }
+  .plan-output { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; font-size: 14px; line-height: 1.8; color: var(--text); white-space: pre-wrap; }
+  .plan-output h2 { font-size: 15px; font-weight: 500; margin: 1.25rem 0 .5rem; color: var(--text); }
+  .plan-output h2:first-child { margin-top: 0; }
+  .plan-output p { margin-bottom: .75rem; }
+  .plan-output ul { padding-left: 1.25rem; margin-bottom: .75rem; }
+  .plan-output li { margin-bottom: .35rem; }
+  .plan-output strong { font-weight: 500; }
+  .plan-score-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  .psb-pill { font-size: 11px; padding: 3px 10px; border-radius: 20px; border: 0.5px solid var(--border2); color: var(--text2); }
+  .psb-pill.low { background: #FCEBEB; color: #A32D2D; border-color: #F09595; }
+  .psb-pill.mid { background: #FAEEDA; color: #633806; border-color: #FAC775; }
+  .psb-pill.ok  { background: #EAF3DE; color: #27500A; border-color: #97C459; }
+  @media (prefers-color-scheme: dark) {
+    .psb-pill.low { background: #501313; color: #F09595; border-color: #A32D2D; }
+    .psb-pill.mid { background: #412402; color: #FAC775; border-color: #854F0B; }
+    .psb-pill.ok  { background: #173404; color: #C0DD97; border-color: #3B6D11; }
+  }
 </style>
 </head>
 <body>
 <div class="container">
-  <div style="display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:.25rem;"><h1>Diagnóstico Digital</h1><span style="font-size:18px; color:var(--text2);">—</span><input id="client-name" type="text" placeholder="Nome do cliente" value="" style="font-size:18px; font-weight:500; color:var(--text); background:transparent; border:none; border-bottom:1.5px solid var(--border2); outline:none; padding:2px 4px; min-width:160px; font-family:inherit;" oninput="updateClientName(this.value)"></div>
+  <div style="display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:.25rem;">
+    <h1>Diagnóstico Digital</h1>
+    <span style="font-size:18px; color:var(--text2);">—</span>
+    <input id="client-name" type="text" placeholder="Nome do cliente" style="font-size:18px; font-weight:500; color:var(--text); background:transparent; border:none; border-bottom:1.5px solid var(--border2); outline:none; padding:2px 4px; min-width:160px; font-family:inherit;" oninput="updateClientName(this.value)">
+  </div>
   <p class="subtitle">Ferramenta de apoio para sessão de diagnóstico · <span id="date-display"></span></p>
 
   <div class="tabs">
     <button class="tab active" onclick="switchTab('mapa')">Mapa de pontuação</button>
     <button class="tab" onclick="switchTab('radar')">Spider chart</button>
     <button class="tab" onclick="switchTab('notas')">Notas da sessão</button>
+    <button class="tab" onclick="switchTab('plano')">Plano de ação</button>
   </div>
 
-  <!-- PAINEL 1 -->
+  <!-- PAINEL 1: MAPA -->
   <div class="panel active" id="panel-mapa">
     <div id="pilares-container"></div>
     <div class="total-grid">
@@ -113,16 +119,17 @@
     </div>
     <div class="btn-row">
       <button class="btn" onclick="resetAll()">Limpar notas</button>
-      <button class="btn primary" onclick="switchTab('radar')">Ver spider chart →</button>
+      <button class="btn" onclick="switchTab('radar')">Ver spider chart →</button>
+      <button class="btn primary" id="btn-gerar" onclick="switchTab('plano'); gerarPlano()">Gerar plano de ação →</button>
     </div>
   </div>
 
-  <!-- PAINEL 2 -->
+  <!-- PAINEL 2: RADAR -->
   <div class="panel" id="panel-radar">
     <div class="chart-wrap">
       <div class="legend-row">
         <span><span class="leg-line" style="background:#378ADD;"></span>Ideal (meta)</span>
-        <span><span class="leg-line" style="background:#D85A30; opacity:.8;"></span>Abel (atual)</span>
+        <span><span class="leg-line" style="background:#D85A30; opacity:.8;"></span>Cliente (atual)</span>
       </div>
       <div style="position:relative; width:100%; max-width:500px; margin:0 auto; height:380px;">
         <canvas id="radarChart"></canvas>
@@ -136,38 +143,49 @@
     </div>
   </div>
 
-  <!-- PAINEL 3 -->
+  <!-- PAINEL 3: NOTAS -->
   <div class="panel" id="panel-notas">
     <div class="section-label">Observações gerais</div>
-    <textarea class="notes-area" placeholder="Anotações livres durante a sessão..."></textarea>
+    <textarea class="notes-area" id="nota-geral" placeholder="Anotações livres durante a sessão..."></textarea>
     <div class="section-label">Principais gaps identificados</div>
-    <textarea class="notes-area" placeholder="Liste os 3 gaps mais críticos..."></textarea>
+    <textarea class="notes-area" id="nota-gaps" placeholder="Liste os 3 gaps mais críticos..."></textarea>
     <div class="section-label">Próximos passos combinados</div>
-    <textarea class="notes-area" placeholder="O que foi acordado para até a próxima call..."></textarea>
-    <div class="section-label">Tarefa do Abel</div>
-    <textarea class="notes-area" placeholder="Listar 30 contatos qualificados da rede..."></textarea>
+    <textarea class="notes-area" id="nota-proximos" placeholder="O que foi acordado para até a próxima call..."></textarea>
+    <div class="section-label">Tarefa do cliente</div>
+    <textarea class="notes-area" id="nota-tarefa" placeholder="Ex: listar 30 contatos qualificados da rede..."></textarea>
     <div class="btn-row">
       <button class="btn primary" onclick="exportPDF()">Exportar PDF completo</button>
+    </div>
+  </div>
+
+  <!-- PAINEL 4: PLANO DE AÇÃO IA -->
+  <div class="panel" id="panel-plano">
+    <div id="plano-content">
+      <div class="plan-empty">
+        <strong>Plano de ação com IA</strong>
+        Preencha as notas no mapa de pontuação e clique em<br>"Gerar plano de ação com IA" para começar.
+      </div>
+    </div>
+    <div class="btn-row" style="margin-top:1rem;">
+      <button class="btn" onclick="switchTab('mapa')">← Voltar ao mapa</button>
+      <button class="btn" id="btn-regenerar" onclick="gerarPlano()" style="display:none;">Regenerar plano</button>
+      <button class="btn primary" onclick="exportPDF()">Exportar PDF</button>
     </div>
   </div>
 </div>
 
 <script>
 const pilares = [
-  {
-    nome: "Autoridade & Posicionamento", cor: "#378ADD",
-    idealAvg: 4.6,
+  { nome: "Autoridade & Posicionamento", cor: "#378ADD", idealAvg: 4.6,
     subs: [
-      { criterio: "Reputação offline", pergunta: "Como você descreveria o que faz em uma frase para um dono de PME?", ref1: "não consegue articular", ref5: "frase clara e diferenciada" },
+      { criterio: "Reputação offline", pergunta: "Como você descreveria o que faz em uma frase para alguém que nunca te conheceu?", ref1: "não consegue articular", ref5: "frase clara e diferenciada" },
       { criterio: "Clareza de nicho", pergunta: "Qual problema você resolve melhor que qualquer pessoa?", ref1: "resposta genérica", ref5: "nicho específico e urgente" },
       { criterio: "Bio e perfil otimizados", pergunta: "— observação direta do perfil", ref1: "bio corporativa / vaga", ref5: "bio focada no cliente e dor" },
       { criterio: "Consistência de mensagem", pergunta: "Você já tentou comunicar esse diferencial nas redes?", ref1: "mensagem diferente a cada post", ref5: "linha editorial coerente" },
       { criterio: "Diferencial claro no digital", pergunta: "Quando alguém te indica, o que essa pessoa diz?", ref1: "indicação genérica", ref5: "indicação com motivo específico" }
     ]
   },
-  {
-    nome: "Audiência & Distribuição", cor: "#1D9E75",
-    idealAvg: 4.6,
+  { nome: "Audiência & Distribuição", cor: "#1D9E75", idealAvg: 4.6,
     subs: [
       { criterio: "Tamanho da base", pergunta: "Quantos seguidores no Instagram e LinkedIn?", ref1: "< 500 total", ref5: "> 5k engajados" },
       { criterio: "Engajamento real", pergunta: "— observação direta dos posts", ref1: "< 1% engajamento", ref5: "> 5% engajamento consistente" },
@@ -176,9 +194,7 @@ const pilares = [
       { criterio: "Presença no LinkedIn", pergunta: "— observação direta do perfil", ref1: "perfil abandonado", ref5: "perfil ativo e otimizado" }
     ]
   },
-  {
-    nome: "Produto & Esteira", cor: "#7F77DD",
-    idealAvg: 4.6,
+  { nome: "Produto & Esteira", cor: "#7F77DD", idealAvg: 4.6,
     subs: [
       { criterio: "Low-ticket definido", pergunta: "Me conta todos os produtos que você tem prontos.", ref1: "não existe ou vago", ref5: "produto claro, precificado, pronto" },
       { criterio: "High-ticket definido", pergunta: "Mentoria ou serviço premium?", ref1: "não existe", ref5: "oferta clara com processo definido" },
@@ -187,31 +203,25 @@ const pilares = [
       { criterio: "Produto validado com vendas", pergunta: "Já vendeu algum, mesmo informalmente?", ref1: "nunca vendeu nada", ref5: "vendas recorrentes comprovadas" }
     ]
   },
-  {
-    nome: "Prova Social & Confiança", cor: "#D85A30",
-    idealAvg: 4.6,
+  { nome: "Prova Social & Confiança", cor: "#D85A30", idealAvg: 4.6,
     subs: [
-      { criterio: "Histórico profissional sólido", pergunta: "— background como CFO e referência em Brasília", ref1: "sem histórico relevante", ref5: "trajetória de alto impacto" },
+      { criterio: "Histórico profissional sólido", pergunta: "— background e trajetória profissional", ref1: "sem histórico relevante", ref5: "trajetória de alto impacto" },
       { criterio: "Resultados de clientes", pergunta: "Tem clientes com resultado numérico comprovado?", ref1: "nenhum resultado documentado", ref5: "múltiplos cases com números" },
       { criterio: "Depoimentos em vídeo", pergunta: "Alguém te mandou mensagem de agradecimento?", ref1: "zero depoimentos", ref5: "depoimentos em vídeo publicados" },
       { criterio: "Cases documentados", pergunta: "Tem cases escritos ou publicados?", ref1: "não tem nenhum", ref5: "cases detalhados no perfil" },
       { criterio: "Prova social nas redes", pergunta: "— observação dos posts e stories", ref1: "nenhuma menção de clientes", ref5: "prova social frequente e variada" }
     ]
   },
-  {
-    nome: "Funil & Conversão", cor: "#BA7517",
-    idealAvg: 4.8,
+  { nome: "Funil & Conversão", cor: "#BA7517", idealAvg: 4.8,
     subs: [
       { criterio: "Isca digital / lead magnet", pergunta: "Existe algum caminho estruturado para comprar?", ref1: "não existe nada", ref5: "isca ativa gerando leads" },
       { criterio: "Landing page de captura", pergunta: "Tem página de vendas ou checkout?", ref1: "não tem", ref5: "página otimizada e convertendo" },
       { criterio: "Sequência de e-mails", pergunta: "— infraestrutura de automação", ref1: "não tem", ref5: "sequência ativa e testada" },
       { criterio: "Página de vendas", pergunta: "Tem link de pagamento configurado?", ref1: "não tem", ref5: "página completa e funcional" },
-      { criterio: "Processo de venda ativo", pergunta: "Se precisasse vender 2 mentorias em 30 dias, qual seria seu plano?", ref1: "não sabe por onde começar", ref5: "processo claro e testado" }
+      { criterio: "Processo de venda ativo", pergunta: "Se precisasse gerar receita com seu principal produto em 30 dias, qual seria o seu plano?", ref1: "não sabe por onde começar", ref5: "processo claro e testado" }
     ]
   },
-  {
-    nome: "Operação & Consistência", cor: "#639922",
-    idealAvg: 4.4,
+  { nome: "Operação & Consistência", cor: "#639922", idealAvg: 4.4,
     subs: [
       { criterio: "Calendário editorial", pergunta: "Você posta com regularidade hoje?", ref1: "posta quando lembra", ref5: "calendário fixo com temas" },
       { criterio: "Frequência de postagem", pergunta: "Quantas horas por semana dedica ao digital?", ref1: "menos de 1h/semana", ref5: "rotina consistente > 5h/semana" },
@@ -225,11 +235,15 @@ const pilares = [
 const scores = {};
 let radarChart = null;
 let totalSubs = 0;
-pilares.forEach(p => { p.subs.forEach((s, si) => { scores[p.nome+'_'+si] = 0; totalSubs++; }); });
+pilares.forEach(p => p.subs.forEach((s,si) => { scores[p.nome+'_'+si] = 0; totalSubs++; }));
 
 function getAvg(pilar) {
   const vals = pilar.subs.map((s,si) => scores[pilar.nome+'_'+si]).filter(v => v > 0);
   return vals.length ? vals.reduce((a,b)=>a+b,0)/vals.length : 0;
+}
+
+function filledCount() {
+  return Object.values(scores).filter(v => v > 0).length;
 }
 
 function updateTotals() {
@@ -261,8 +275,7 @@ function setScore(pilarNome, subIdx, val) {
     btn.style.background = bv <= val ? cor : '';
     btn.style.borderColor = bv <= val ? cor : '';
   });
-  const svId = 'sv_'+pilarNome.replace(/[^a-z]/gi,'')+'_'+subIdx;
-  const svEl = document.getElementById(svId);
+  const svEl = document.getElementById('sv_'+pilarNome.replace(/[^a-z]/gi,'')+'_'+subIdx);
   if (svEl) svEl.textContent = val > 0 ? val : '—';
   updateTotals();
 }
@@ -271,14 +284,14 @@ function resetAll() {
   Object.keys(scores).forEach(k => scores[k] = 0);
   document.querySelectorAll('.dot-btn').forEach(btn => { btn.style.background=''; btn.style.borderColor=''; });
   document.querySelectorAll('[id^="sv_"]').forEach(el => el.textContent = '—');
+  document.getElementById('plano-content').innerHTML = '<div class="plan-empty"><strong>Plano de ação com IA</strong>Preencha as notas no mapa de pontuação e clique em<br>"Gerar plano de ação com IA" para começar.</div>';
+  document.getElementById('btn-regenerar').style.display = 'none';
   updateTotals();
 }
 
 function updateRadar() {
-  const abelData = pilares.map(p => { const a = getAvg(p); return a > 0 ? +a.toFixed(2) : 0; });
-  const idealData = pilares.map(p => p.idealAvg);
   if (!radarChart) return;
-  radarChart.data.datasets[1].data = abelData;
+  radarChart.data.datasets[1].data = pilares.map(p => { const a = getAvg(p); return a > 0 ? +a.toFixed(2) : 0; });
   radarChart.update();
 }
 
@@ -287,25 +300,107 @@ function updatePilarScoreCards() {
   if (!grid) return;
   grid.innerHTML = pilares.map(p => {
     const avg = getAvg(p);
-    const pct = avg > 0 ? Math.round((avg/p.idealAvg)*100) : 0;
     const col = avg === 0 ? 'var(--text2)' : avg >= 3.5 ? 'var(--success)' : avg >= 2 ? 'var(--warning)' : 'var(--danger)';
-    return `<div class="pilar-score-card">
-      <span class="psc-name" style="display:flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:${p.cor};flex-shrink:0;"></span>${p.nome}</span>
-      <span class="psc-val" style="color:${col}">${avg > 0 ? avg.toFixed(1)+'/5' : '—'}</span>
-    </div>`;
+    return `<div class="pilar-score-card"><span class="psc-name" style="display:flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:${p.cor};flex-shrink:0;"></span>${p.nome}</span><span class="psc-val" style="color:${col}">${avg > 0 ? avg.toFixed(1)+'/5' : '—'}</span></div>`;
   }).join('');
 }
 
 function switchTab(id) {
-  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', ['mapa','radar','notas'][i] === id));
+  const ids = ['mapa','radar','notas','plano'];
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', ids[i] === id));
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('panel-'+id).classList.add('active');
   if (id === 'radar') { updatePilarScoreCards(); updateRadar(); }
 }
 
 function exportPDF() { window.print(); }
-function updateClientName(val) {
-  document.title = "Diagnóstico Digital" + (val ? " — " + val : "");
+function updateClientName(val) { document.title = 'Diagnóstico Digital' + (val ? ' — ' + val : ''); }
+
+async function gerarPlano() {
+  const filled = filledCount();
+  const clientName = document.getElementById('client-name').value || 'cliente';
+  const planoDiv = document.getElementById('plano-content');
+  const btnRegen = document.getElementById('btn-regenerar');
+
+  if (filled < 10) {
+    planoDiv.innerHTML = '<div class="plan-empty"><strong>Notas insuficientes</strong>Preencha pelo menos 10 sub-critérios no mapa de pontuação para gerar um plano relevante.<br><br><button class="btn primary" onclick="switchTab(\'mapa\')">← Voltar ao mapa</button></div>';
+    return;
+  }
+
+  planoDiv.innerHTML = '<div class="plan-loading"><div class="spinner"></div>Analisando o diagnóstico e gerando o plano de ação...</div>';
+  btnRegen.style.display = 'none';
+
+  const resumo = pilares.map(p => {
+    const avg = getAvg(p);
+    const detalhes = p.subs.map((s,si) => {
+      const nota = scores[p.nome+'_'+si];
+      return nota > 0 ? `  - ${s.criterio}: ${nota}/5` : null;
+    }).filter(Boolean).join('\n');
+    return `${p.nome}: média ${avg > 0 ? avg.toFixed(1) : 'não avaliado'}/5\n${detalhes}`;
+  }).join('\n\n');
+
+  const notas = [
+    document.getElementById('nota-geral')?.value,
+    document.getElementById('nota-gaps')?.value
+  ].filter(Boolean).join('\n');
+
+  const prompt = `Você é um consultor especialista em marketing digital para criadores de conteúdo e infoprodutores.
+
+Você acabou de conduzir uma sessão de diagnóstico com ${clientName}, que quer se lançar ou crescer no digital para vender seus produtos e serviços.
+
+Aqui estão as notas do diagnóstico (escala 1 a 5, onde 5 é o ideal):
+
+${resumo}
+
+${notas ? `Observações adicionais da sessão:\n${notas}` : ''}
+
+Com base nessas notas, gere um plano de ação personalizado e priorizado. O plano deve:
+
+1. Começar com um parágrafo de diagnóstico resumido (2-3 frases) que contextualiza o perfil do ${clientName}
+2. Listar as 3 prioridades imediatas (próximas 2 semanas) — focadas nos gaps mais críticos que travam a geração de receita
+3. Listar as 3 prioridades de médio prazo (meses 2-3) — construção de audiência e funil
+4. Terminar com 1 insight estratégico principal: o que mais vai mover o ponteiro para esse perfil específico
+
+Seja direto, prático e específico. Use linguagem consultiva mas acessível. Não use jargões desnecessários. Formato: use títulos claros para cada seção e bullet points para as ações. Responda em português brasileiro.`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    const data = await response.json();
+    const text = data.content?.find(b => b.type === 'text')?.text || '';
+
+    if (!text) throw new Error('Resposta vazia');
+
+    const pillsHtml = pilares.map(p => {
+      const avg = getAvg(p);
+      if (avg === 0) return '';
+      const cls = avg >= 3.5 ? 'ok' : avg >= 2 ? 'mid' : 'low';
+      return `<span class="psb-pill ${cls}">${p.nome.split(' ')[0]}: ${avg.toFixed(1)}</span>`;
+    }).join('');
+
+    const rendered = text
+      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+      .replace(/^### (.+)$/gm, '<h2>$1</h2>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/^- (.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*<\/li>\n?)+/g, m => `<ul>${m}</ul>`)
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/^(?!<[hul])(.+)$/gm, (m) => m.startsWith('<') ? m : m);
+
+    planoDiv.innerHTML = `<div class="plan-score-bar">${pillsHtml}</div><div class="plan-output">${rendered}</div>`;
+    btnRegen.style.display = 'inline-block';
+
+  } catch (err) {
+    planoDiv.innerHTML = `<div class="plan-empty"><strong>Erro ao gerar o plano</strong>Verifique sua conexão e tente novamente.<br><small style="color:var(--text3)">${err.message}</small><br><br><button class="btn primary" onclick="gerarPlano()">Tentar novamente</button></div>`;
+  }
 }
 
 const container = document.getElementById('pilares-container');
@@ -331,17 +426,13 @@ pilares.forEach(p => {
     body.style.maxHeight = isOpen ? '0px' : '2000px';
     head.querySelector('.chevron').classList.toggle('open', !isOpen);
   });
-  block.appendChild(head);
-  block.appendChild(body);
-  container.appendChild(block);
+  block.appendChild(head); block.appendChild(body); container.appendChild(block);
 });
 
-window.addEventListener("load", () => {
-  // Set today date
+window.addEventListener('load', () => {
   const d = new Date();
-  const dateEl = document.getElementById("date-display");
-  if (dateEl) dateEl.textContent = d.toLocaleDateString("pt-BR", {day:"2-digit",month:"long",year:"numeric"});
-
+  const dateEl = document.getElementById('date-display');
+  if (dateEl) dateEl.textContent = d.toLocaleDateString('pt-BR', {day:'2-digit',month:'long',year:'numeric'});
   const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const gridColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
   const tickColor = isDark ? '#6e6c66' : '#888780';
@@ -352,7 +443,7 @@ window.addEventListener("load", () => {
       labels: pilares.map(p => p.nome),
       datasets: [
         { label: 'Ideal', data: pilares.map(p => p.idealAvg), borderColor: '#378ADD', backgroundColor: 'rgba(55,138,221,0.08)', borderWidth: 2, pointBackgroundColor: '#378ADD', pointRadius: 4 },
-        { label: 'Abel', data: pilares.map(() => 0), borderColor: '#D85A30', backgroundColor: 'rgba(216,90,48,0.12)', borderWidth: 2, pointBackgroundColor: '#D85A30', pointRadius: 4 }
+        { label: 'Cliente', data: pilares.map(() => 0), borderColor: '#D85A30', backgroundColor: 'rgba(216,90,48,0.12)', borderWidth: 2, pointBackgroundColor: '#D85A30', pointRadius: 4 }
       ]
     },
     options: {
